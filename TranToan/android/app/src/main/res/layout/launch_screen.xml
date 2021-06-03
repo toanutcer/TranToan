@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imgLogo"
+        android:layout_width="match_parent"
+        android:layout_height="542dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="189dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/logo2" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Mình là toàn"
+        android:textSize="25dp"
+        android:layout_marginTop="600dp"
+        android:layout_marginLeft="30dp"/>
+</RelativeLayout>
