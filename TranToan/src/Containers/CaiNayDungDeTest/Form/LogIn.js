@@ -1,21 +1,23 @@
+import {yupResolver} from '@hookform/resolvers/yup';
 import React from 'react';
+import {useForm} from 'react-hook-form';
 import {
-  Text,
-  View,
-  StyleSheet,
   Image,
-  TouchableOpacity,
   ImageBackground,
-  Dimensions,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 import {Button} from 'react-native-elements';
-import {useForm} from 'react-hook-form';
-import ComponentInput from '../../../Components/ComponentInput';
-import {yupResolver} from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import {Color, fontFamily, FontSize, IMAGES, ICONS} from '../../../Themes';
-import perfectSize from '../../../Themes/Screen';
 import {Navigation} from 'react-native-navigation';
+import * as yup from 'yup';
+import ComponentInput from '../../../Components/ComponentInput';
+import {Color, fontFamily, FontSize, ICONS, IMAGES} from '../../../Themes';
+import perfectSize from '../../../Themes/Screen';
+//Fb login
+
+import {LoginManager, AccessToken} from 'react-native-fbsdk';
 const schema = yup.object().shape({
   user: yup
     .string()
@@ -30,7 +32,26 @@ export default function App(props) {
     formState: {errors},
   } = useForm({resolver: yupResolver(schema)});
   const onSubmit = data => console.log(data);
-
+  //Function facebook Auth
+  //TODO: Facebook Login
+  //FIXME: cần sửa lại hask key, lỗi đâu không biết
+  function _fbAuth() {
+    LoginManager.logInWithPermissions(['public_profile']).then(
+      function (result) {
+        if (result.isCancelled) {
+          console.log('Login cancelled');
+        } else {
+          console.log(
+            'Login success with permissions: ' +
+              result.grantedPermissions.toString(),
+          );
+        }
+      },
+      function (error) {
+        console.log('Login fail with error: ' + error);
+      },
+    );
+  }
   return (
     <ImageBackground source={IMAGES.bgLogin} style={styles.container}>
       <View style={styles.header}>
@@ -94,7 +115,7 @@ export default function App(props) {
           />
         </View>
         <View style={{flexDirection: 'row'}}>
-          <TouchableOpacity style={styles.touchIcon}>
+          <TouchableOpacity style={styles.touchIcon} onPress={_fbAuth}>
             <Image source={ICONS.fb} style={styles.icon} />
           </TouchableOpacity>
           <TouchableOpacity style={styles.touchIcon}>

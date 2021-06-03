@@ -196,14 +196,7 @@ export default function App(props) {
           <Text style={{fontSize: FontSize.size15, color: Color.white}}>
             Already Member?
           </Text>
-          <TouchableOpacity
-            onPress={() =>
-              Navigation.push(props.componentId, {
-                component: {
-                  name: 'LogInScreen',
-                },
-              })
-            }>
+          <TouchableOpacity onPress={() => Navigation.pop(props.componentId)}>
             <Text style={styles.txtIsAcount}> Login</Text>
           </TouchableOpacity>
         </View>
